@@ -24,6 +24,10 @@ const upgradeCountA = document.getElementById("upgradeCountA")!;
 const upgradeCountB = document.getElementById("upgradeCountB")!;
 const upgradeCountC = document.getElementById("upgradeCountC")!;
 
+let upgradeCostA = 10;
+let upgradeCostB = 100;
+let upgradeCostC = 1000;
+
 // Function to update the count display
 function updateCountDisplay() {
   countDisplay.textContent = `Count: ${count.toFixed(2)}🍣`;
@@ -61,21 +65,32 @@ const upgradeButtonA = document.createElement("button");
 const upgradeButtonB = document.createElement("button");
 const upgradeButtonC = document.createElement("button");
 
-upgradeButtonA.textContent = "Purchase Upgrade (Cost: 10)";
+function updateUpgradeCosts() {
+  upgradeButtonA.textContent = `Purchase Upgrade (Cost: ${upgradeCostA.toFixed(
+    2,
+  )})`;
+
+  upgradeButtonB.textContent = `Purchase Upgrade (Cost: ${upgradeCostB.toFixed(
+    2,
+  )})`;
+
+  upgradeButtonC.textContent = `Purchase Upgrade (Cost: ${upgradeCostC.toFixed(
+    2,
+  )})`;
+}
+
 upgradeButtonA.disabled = true; // Disable by default
-
-upgradeButtonB.textContent = "Purchase Upgrade (Cost: 100)";
 upgradeButtonB.disabled = true; // Disable by default
-
-upgradeButtonC.textContent = "Purchase Upgrade (Cost: 1000)";
 upgradeButtonC.disabled = true; // Disable by default
 
 upgradeButtonA.addEventListener("click", function () {
-  if (count >= 10) {
-    count -= 10; // Deduct 10 units
+  if (count >= upgradeCostA) {
+    count -= upgradeCostA; // Deduct 10 units
+    upgradeCostA = upgradeCostA * 1.15;
     growthRate += 0.1; // Increment the growth rate
     autoIncrementActive = true; // Enable auto-increment after purchase
     upgradeItems[0].count++;
+    updateUpgradeCosts();
     updateCountDisplay();
     updateGrowthRateDisplay();
     updateUpgradeCounts();
@@ -83,11 +98,13 @@ upgradeButtonA.addEventListener("click", function () {
   }
 });
 upgradeButtonB.addEventListener("click", function () {
-  if (count >= 100) {
-    count -= 100; // Deduct 10 units
+  if (count >= upgradeCostB) {
+    count -= upgradeCostB; // Deduct 10 units
+    upgradeCostB = upgradeCostB * 1.15;
     growthRate += 2.0; // Increment the growth rate
     autoIncrementActive = true; // Enable auto-increment after purchase
     upgradeItems[1].count++;
+    updateUpgradeCosts();
     updateCountDisplay();
     updateUpgradeCounts();
     updateGrowthRateDisplay();
@@ -95,11 +112,13 @@ upgradeButtonB.addEventListener("click", function () {
   }
 });
 upgradeButtonC.addEventListener("click", function () {
-  if (count >= 1000) {
-    count -= 1000; // Deduct 10 units
+  if (count >= upgradeCostC) {
+    count -= upgradeCostC; // Deduct 10 units
+    upgradeCostC = upgradeCostC * 1.15;
     growthRate += 50; // Increment the growth rate
     autoIncrementActive = true; // Enable auto-increment after purchase
     upgradeItems[2].count++;
+    updateUpgradeCosts();
     updateUpgradeCounts();
     updateCountDisplay();
     updateGrowthRateDisplay();
@@ -129,17 +148,17 @@ app.append(upgradeCountContainer);
 
 // Function to check if the upgrade can be afforded
 function checkUpgradeAffordability() {
-  if (count >= 10) {
+  if (count >= upgradeCostA) {
     upgradeButtonA.disabled = false;
   } else {
     upgradeButtonA.disabled = true;
   }
-  if (count >= 100) {
+  if (count >= upgradeCostB) {
     upgradeButtonB.disabled = false;
   } else {
     upgradeButtonB.disabled = true;
   }
-  if (count >= 1000) {
+  if (count >= upgradeCostC) {
     upgradeButtonC.disabled = false;
   } else {
     upgradeButtonC.disabled = true;
@@ -154,9 +173,9 @@ interface UpgradeItem {
 }
 
 const upgradeItems: UpgradeItem[] = [
-  { id: "A", cost: 10, growthRate: 0.1, count: 0 },
-  { id: "B", cost: 100, growthRate: 2.0, count: 0 },
-  { id: "C", cost: 1000, growthRate: 50, count: 0 },
+  { id: "A", cost: upgradeCostA, growthRate: 0.1, count: 0 },
+  { id: "B", cost: upgradeCostB, growthRate: 2.0, count: 0 },
+  { id: "C", cost: upgradeCostC, growthRate: 50, count: 0 },
 ];
 
 function updateUpgradeCounts() {
@@ -166,5 +185,6 @@ function updateUpgradeCounts() {
 }
 
 updateUpgradeCounts();
+updateUpgradeCosts();
 // Add event listener to the count display for upgrade affordability check
 countDisplay.addEventListener("DOMSubtreeModified", checkUpgradeAffordability);

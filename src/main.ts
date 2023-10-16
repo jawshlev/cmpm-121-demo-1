@@ -2,7 +2,7 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Josh's game";
+const gameName = "FEED THE KITTY";
 
 document.title = gameName;
 
@@ -66,15 +66,15 @@ const upgradeButtonB = document.createElement("button");
 const upgradeButtonC = document.createElement("button");
 
 function updateUpgradeCosts() {
-  upgradeButtonA.textContent = `Purchase Upgrade (Cost: ${upgradeCostA.toFixed(
+  upgradeButtonA.textContent = `Safeway Sushi🛒 (Cost: ${upgradeCostA.toFixed(
     2,
   )})`;
 
-  upgradeButtonB.textContent = `Purchase Upgrade (Cost: ${upgradeCostB.toFixed(
+  upgradeButtonB.textContent = `Homemade Sushi🔪 (Cost: ${upgradeCostB.toFixed(
     2,
   )})`;
 
-  upgradeButtonC.textContent = `Purchase Upgrade (Cost: ${upgradeCostC.toFixed(
+  upgradeButtonC.textContent = `Sushi Chef🍱 (Cost: ${upgradeCostC.toFixed(
     2,
   )})`;
 }
@@ -179,9 +179,9 @@ const upgradeItems: UpgradeItem[] = [
 ];
 
 function updateUpgradeCounts() {
-  upgradeCountA.textContent = `Upgrade A: ${upgradeItems[0].count}`;
-  upgradeCountB.textContent = `Upgrade B: ${upgradeItems[1].count}`;
-  upgradeCountC.textContent = `Upgrade C: ${upgradeItems[2].count}`;
+  upgradeCountA.textContent = `Safeway Sushi🛒: ${upgradeItems[0].count}`;
+  upgradeCountB.textContent = `Homemade Sushi🔪: ${upgradeItems[1].count}`;
+  upgradeCountC.textContent = `Sushi Chef🍱: ${upgradeItems[2].count}`;
 }
 
 updateUpgradeCounts();

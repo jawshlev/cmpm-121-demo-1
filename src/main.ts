@@ -20,13 +20,13 @@ const myButton = document.getElementById("counterButton")!;
 myButton.style.textAlign = "center";
 
 const growthRateDisplay = document.getElementById("growthRateDisplay")!;
-const upgradeCountA = document.getElementById("upgradeCountA")!;
-const upgradeCountB = document.getElementById("upgradeCountB")!;
-const upgradeCountC = document.getElementById("upgradeCountC")!;
+const upgradeCountSafeway = document.getElementById("upgradeCountA")!;
+const upgradeCountHomemade = document.getElementById("upgradeCountB")!;
+const upgradeCountChef = document.getElementById("upgradeCountC")!;
 
-let upgradeCostA = 10;
-let upgradeCostB = 100;
-let upgradeCostC = 1000;
+let upgradeCostSafeway = 10;
+let upgradeCostHomemade = 100;
+let upgradeCostChef = 1000;
 
 // Function to update the count display
 function updateCountDisplay() {
@@ -61,32 +61,32 @@ myButton.addEventListener("click", function () {
 });
 
 // Add a purchasable upgrade item
-const upgradeButtonA = document.createElement("button");
-const upgradeButtonB = document.createElement("button");
-const upgradeButtonC = document.createElement("button");
+const upgradeButtonSafeway = document.createElement("button");
+const upgradeButtonHomemade = document.createElement("button");
+const upgradeButtonChef = document.createElement("button");
 
 function updateUpgradeCosts() {
-  upgradeButtonA.textContent = `Safeway Sushi🛒 (Cost: ${upgradeCostA.toFixed(
+  upgradeButtonSafeway.textContent = `Safeway Sushi🛒 (Cost: ${upgradeCostSafeway.toFixed(
     2,
   )})`;
 
-  upgradeButtonB.textContent = `Homemade Sushi🔪 (Cost: ${upgradeCostB.toFixed(
+  upgradeButtonHomemade.textContent = `Homemade Sushi🔪 (Cost: ${upgradeCostHomemade.toFixed(
     2,
   )})`;
 
-  upgradeButtonC.textContent = `Sushi Chef🍱 (Cost: ${upgradeCostC.toFixed(
+  upgradeButtonChef.textContent = `Sushi Chef🍱 (Cost: ${upgradeCostChef.toFixed(
     2,
   )})`;
 }
 
-upgradeButtonA.disabled = true; // Disable by default
-upgradeButtonB.disabled = true; // Disable by default
-upgradeButtonC.disabled = true; // Disable by default
+upgradeButtonSafeway.disabled = true; // Disable by default
+upgradeButtonHomemade.disabled = true; // Disable by default
+upgradeButtonChef.disabled = true; // Disable by default
 
-upgradeButtonA.addEventListener("click", function () {
-  if (count >= upgradeCostA) {
-    count -= upgradeCostA; // Deduct 10 units
-    upgradeCostA = upgradeCostA * 1.15;
+upgradeButtonSafeway.addEventListener("click", function () {
+  if (count >= upgradeCostSafeway) {
+    count -= upgradeCostSafeway; // Deduct 10 units
+    upgradeCostSafeway = upgradeCostSafeway * 1.15;
     growthRate += 0.1; // Increment the growth rate
     autoIncrementActive = true; // Enable auto-increment after purchase
     upgradeItems[0].count++;
@@ -97,10 +97,10 @@ upgradeButtonA.addEventListener("click", function () {
     checkUpgradeAffordability(); // Recheck affordability after purchase
   }
 });
-upgradeButtonB.addEventListener("click", function () {
-  if (count >= upgradeCostB) {
-    count -= upgradeCostB; // Deduct 10 units
-    upgradeCostB = upgradeCostB * 1.15;
+upgradeButtonHomemade.addEventListener("click", function () {
+  if (count >= upgradeCostHomemade) {
+    count -= upgradeCostHomemade; // Deduct 10 units
+    upgradeCostHomemade = upgradeCostHomemade * 1.15;
     growthRate += 2.0; // Increment the growth rate
     autoIncrementActive = true; // Enable auto-increment after purchase
     upgradeItems[1].count++;
@@ -111,10 +111,10 @@ upgradeButtonB.addEventListener("click", function () {
     checkUpgradeAffordability(); // Recheck affordability after purchase
   }
 });
-upgradeButtonC.addEventListener("click", function () {
-  if (count >= upgradeCostC) {
-    count -= upgradeCostC; // Deduct 10 units
-    upgradeCostC = upgradeCostC * 1.15;
+upgradeButtonChef.addEventListener("click", function () {
+  if (count >= upgradeCostChef) {
+    count -= upgradeCostChef; // Deduct 10 units
+    upgradeCostChef = upgradeCostChef * 1.15;
     growthRate += 50; // Increment the growth rate
     autoIncrementActive = true; // Enable auto-increment after purchase
     upgradeItems[2].count++;
@@ -133,35 +133,35 @@ app.append(header);
 
 const upgradeContainer = document.createElement("div");
 upgradeContainer.style.textAlign = "center"; // Center-align the container
-upgradeContainer.appendChild(upgradeButtonA);
-upgradeContainer.appendChild(upgradeButtonB);
-upgradeContainer.appendChild(upgradeButtonC);
+upgradeContainer.appendChild(upgradeButtonSafeway);
+upgradeContainer.appendChild(upgradeButtonHomemade);
+upgradeContainer.appendChild(upgradeButtonChef);
 app.append(upgradeContainer);
 
 const upgradeCountContainer = document.createElement("div");
 upgradeCountContainer.style.textAlign = "center";
 upgradeCountContainer.appendChild(growthRateDisplay);
-upgradeCountContainer.appendChild(upgradeCountA);
-upgradeCountContainer.appendChild(upgradeCountB);
-upgradeCountContainer.appendChild(upgradeCountC);
+upgradeCountContainer.appendChild(upgradeCountSafeway);
+upgradeCountContainer.appendChild(upgradeCountHomemade);
+upgradeCountContainer.appendChild(upgradeCountChef);
 app.append(upgradeCountContainer);
 
 // Function to check if the upgrade can be afforded
 function checkUpgradeAffordability() {
-  if (count >= upgradeCostA) {
-    upgradeButtonA.disabled = false;
+  if (count >= upgradeCostSafeway) {
+    upgradeButtonSafeway.disabled = false;
   } else {
-    upgradeButtonA.disabled = true;
+    upgradeButtonSafeway.disabled = true;
   }
-  if (count >= upgradeCostB) {
-    upgradeButtonB.disabled = false;
+  if (count >= upgradeCostHomemade) {
+    upgradeButtonHomemade.disabled = false;
   } else {
-    upgradeButtonB.disabled = true;
+    upgradeButtonHomemade.disabled = true;
   }
-  if (count >= upgradeCostC) {
-    upgradeButtonC.disabled = false;
+  if (count >= upgradeCostChef) {
+    upgradeButtonChef.disabled = false;
   } else {
-    upgradeButtonC.disabled = true;
+    upgradeButtonChef.disabled = true;
   }
 }
 
@@ -173,15 +173,15 @@ interface UpgradeItem {
 }
 
 const upgradeItems: UpgradeItem[] = [
-  { id: "A", cost: upgradeCostA, growthRate: 0.1, count: 0 },
-  { id: "B", cost: upgradeCostB, growthRate: 2.0, count: 0 },
-  { id: "C", cost: upgradeCostC, growthRate: 50, count: 0 },
+  { id: "A", cost: upgradeCostSafeway, growthRate: 0.1, count: 0 },
+  { id: "B", cost: upgradeCostHomemade, growthRate: 2.0, count: 0 },
+  { id: "C", cost: upgradeCostChef, growthRate: 50, count: 0 },
 ];
 
 function updateUpgradeCounts() {
-  upgradeCountA.textContent = `Safeway Sushi🛒: ${upgradeItems[0].count}`;
-  upgradeCountB.textContent = `Homemade Sushi🔪: ${upgradeItems[1].count}`;
-  upgradeCountC.textContent = `Sushi Chef🍱: ${upgradeItems[2].count}`;
+  upgradeCountSafeway.textContent = `Safeway Sushi🛒: ${upgradeItems[0].count}`;
+  upgradeCountHomemade.textContent = `Homemade Sushi🔪: ${upgradeItems[1].count}`;
+  upgradeCountChef.textContent = `Sushi Chef🍱: ${upgradeItems[2].count}`;
 }
 
 updateUpgradeCounts();
